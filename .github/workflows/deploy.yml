@@ -46,7 +46,7 @@ jobs:
     
     - name: Deploy to EKS
       run: |
-        cd ../commit-service && kubectl apply -f deployment.yaml
+        cd commit-service && kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
 
         cd ../issues-service && kubectl apply -f deployment.yaml
