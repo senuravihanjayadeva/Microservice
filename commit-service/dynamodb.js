@@ -4,7 +4,7 @@ require('dotenv').config()
 // please use your own IAM access credentials you would have created.
 // remember to store the actual values in a .env file
 AWS.config.update({
-    region: process.env.AWS_DEFAULT_REGION,
+    region: 'us-east-1',
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })

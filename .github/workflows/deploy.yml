@@ -41,6 +41,9 @@ jobs:
         cd ../pull-request-service && docker build -t senuradockacc/pull-request-service:latest .
         docker push senuradockacc/pull-request-service:latest
 
+        cd ../main-application && docker build -t senuradockacc/main-app-service:latest .
+        docker push senuradockacc/main-app-service:latest
+
     - name: Update kube config
       run: aws eks update-kubeconfig --name eks-cluster
     
@@ -53,4 +56,7 @@ jobs:
         kubectl apply -f service.yaml
 
         cd ../pull-request-service && kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+
+        cd ../main-application && kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
