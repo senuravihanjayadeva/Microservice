@@ -18,12 +18,12 @@ jobs:
         version: 'v1.24.0' # default is latest stable
       id: install
 
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+    # - name: Configure AWS Credentials
+    #   uses: aws-actions/configure-aws-credentials@v1
+    #   with:
+    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     aws-region: us-east-1
 
     - name: Login to Docker Registry
       run: |
@@ -44,11 +44,17 @@ jobs:
         cd ../main-application && docker build -t senuradockacc/main-app-service:latest .
         docker push senuradockacc/main-app-service:latest
 
-    - name: Update kube config
-      run: aws eks update-kubeconfig --name eks-cluster
+    - name: Configure Google Cloud CLI
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        compute_zone: 'us-central1-c'
     
-    - name: Deploy to EKS
+    - name: Deploy to GKE
       run: |
+        gcloud container clusters get-credentials test-cluster --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
+
         cd commit-service && kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
 
