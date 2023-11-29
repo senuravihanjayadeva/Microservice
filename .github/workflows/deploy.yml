@@ -47,18 +47,19 @@ jobs:
     
     - name: Deploy to GKE
       run: |
-        sudo apt update
-        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
         gcloud container clusters get-credentials test-cluster --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resources.yaml
-        cd commit-service && kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-service.yaml
+        kubectl apply -f commit-deployment.yaml
+        kubectl apply -f commit-service.yaml
 
-        cd ../issues-service && kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-service.yaml
+        kubectl apply -f issues-deployment.yaml
+        kubectl apply -f issues-service.yaml
 
-        cd ../pull-request-service && kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
-
-        cd ../main-application && kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-service.yaml
+        kubectl apply -f pull-deployment.yaml
+        kubectl apply -f pull-service.yaml
