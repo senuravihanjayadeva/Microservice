@@ -12,6 +12,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Add steps to install dependencies for your services, if needed
+    - name: Install dependencies and run unit tests for each service
+      run: |
+        cd issues-service && npm install && npm test
+        cd ../main-application && npm install && npm test
+
     - name: Login to Docker Registry
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
