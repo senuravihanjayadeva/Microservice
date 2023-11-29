@@ -19,8 +19,8 @@ jobs:
 
     - name: Build and push Docker images
       run: |
-        cd commit-service && docker build -t senuradockacc/commit-app-service:v1 --build-arg AWS_ACCESS_KEY_ID_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg AWS_SECRET_ACCESS_KEY_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
-        docker push senuradockacc/commit-app-service:v1
+        cd commit-service && docker build -t senuradockacc/commit-service:latest --build-arg AWS_ACCESS_KEY_ID_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg AWS_SECRET_ACCESS_KEY_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
+        docker push senuradockacc/commit-service:latest
 
         cd ../issues-service && docker build -t senuradockacc/issues-service:latest .
         docker push senuradockacc/issues-service:latest
@@ -28,8 +28,8 @@ jobs:
         cd ../pull-request-service && docker build -t senuradockacc/pull-request-service:latest .
         docker push senuradockacc/pull-request-service:latest
 
-        cd ../main-application && docker build -t senuradockacc/main-app-service:v2 .
-        docker push senuradockacc/main-app-service:v2
+        cd ../main-application && docker build -t senuradockacc/main-app-service:latest .
+        docker push senuradockacc/main-app-service:latest
 
     - name: Configure Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v0
