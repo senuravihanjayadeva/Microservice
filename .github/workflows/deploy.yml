@@ -31,34 +31,34 @@ jobs:
         cd ../main-application && docker build -t senuradockacc/main-app-service:latest .
         docker push senuradockacc/main-app-service:latest
 
-    # - name: Configure Google Cloud CLI
-    #   uses: google-github-actions/setup-gcloud@v0
-    #   with:
-    #     service_account_key: ${{ secrets.GCP_SA_KEY }}
-    #     project_id: ${{ secrets.GCP_PROJECT_ID }}
-    #     install_components: 'gke-gcloud-auth-plugin'
-    #     export_default_credentials: true
+    - name: Configure Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        install_components: 'gke-gcloud-auth-plugin'
+        export_default_credentials: true
     
-    # - name: Deploy to GKE
-    #   run: |
-    #     gcloud container clusters get-credentials test-cluster --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
+    - name: Deploy to GKE
+      run: |
+        gcloud container clusters get-credentials testclustersenura --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
         
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-deployment.yaml
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-service.yaml
-    #     kubectl apply -f commit-deployment.yaml
-    #     kubectl apply -f commit-service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-service.yaml
+        kubectl apply -f commit-deployment.yaml
+        kubectl apply -f commit-service.yaml
 
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-deployment.yaml
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-service.yaml
-    #     kubectl apply -f issues-deployment.yaml
-    #     kubectl apply -f issues-service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" issues-service.yaml
+        kubectl apply -f issues-deployment.yaml
+        kubectl apply -f issues-service.yaml
 
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-deployment.yaml
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-service.yaml
-    #     kubectl apply -f pull-deployment.yaml
-    #     kubectl apply -f pull-service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" pull-service.yaml
+        kubectl apply -f pull-deployment.yaml
+        kubectl apply -f pull-service.yaml
 
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-deployment.yaml
-    #     sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-service.yaml
-    #     kubectl apply -f main-deployment.yaml
-    #     kubectl apply -f main-service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-service.yaml
+        kubectl apply -f main-deployment.yaml
+        kubectl apply -f main-service.yaml
