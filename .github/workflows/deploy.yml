@@ -19,8 +19,8 @@ jobs:
 
     - name: Build and push Docker images
       run: |
-        cd commit-service && docker build -t senuradockacc/commit-service:v1 --build-arg AWS_ACCESS_KEY_ID_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg AWS_SECRET_ACCESS_KEY_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
-        docker push senuradockacc/commit-service:v1
+        cd commit-service && docker build -t senuradockacc/commit-app-service:v1 --build-arg AWS_ACCESS_KEY_ID_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg AWS_SECRET_ACCESS_KEY_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
+        docker push senuradockacc/commit-app-service:v1
 
         cd ../issues-service && docker build -t senuradockacc/issues-service:latest .
         docker push senuradockacc/issues-service:latest
