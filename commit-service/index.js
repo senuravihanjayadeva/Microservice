@@ -9,11 +9,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/commits', (req, res) => {
-  getCommits().then((commits)=>{
-    res.json(commits)
-  }).catch((error)=>{
-    res.json({error: error});
-  })
+  // getCommits().then((commits)=>{
+  //   res.json(commits)
+  // }).catch((error)=>{
+  //   res.json({error: error});
+  // })
+
+res.json({health:"up"})
 })
 
 app.get('/api/commits/:username/:repository', (req, res) => {
