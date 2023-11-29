@@ -47,8 +47,10 @@ jobs:
     
     - name: Deploy to GKE
       run: |
+        sudo apt update
+        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
         gcloud container clusters get-credentials test-cluster --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
-
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resources.yaml
         cd commit-service && kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
 
