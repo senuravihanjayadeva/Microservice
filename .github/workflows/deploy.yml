@@ -65,5 +65,7 @@ jobs:
         kubectl apply -f pull-deployment.yaml
         kubectl apply -f pull-service.yaml
 
-        cd ../main-application && kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-deployment.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" main-service.yaml
+        kubectl apply -f main-deployment.yaml
+        kubectl apply -f main-service.yaml
