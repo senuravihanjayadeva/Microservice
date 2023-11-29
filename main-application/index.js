@@ -13,7 +13,7 @@ const pullrequestservice = `http://pull-request-service:80`
 
 //Commit Service 
 app.get('/commits-service/:username/:repository', (req, res) => {
-    axios.get(`${commitservice}/api/issues/${req.params.username}/${req.params.repository}`).then((response)=>{
+    axios.get(`${commitservice}/api/commits/${req.params.username}/${req.params.repository}`).then((response)=>{
         res.json(response.data);
     }).catch((err)=>{
         res.json(err);

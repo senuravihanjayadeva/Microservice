@@ -9,23 +9,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/commits', (req, res) => {
-  // getCommits().then((commits)=>{
-  //   res.json(commits)
-  // }).catch((error)=>{
-  //   res.json({error: error});
-  // })
-
-res.json({health:"up"})
+  getCommits().then((commits)=>{
+    res.json(commits)
+  }).catch((error)=>{
+    res.json({error: error});
+  })
 })
 
 app.get('/api/commits/:username/:repository', (req, res) => {
   axios.get(`https://api.github.com/repos/${req.params.username}/${req.params.repository}/commits`).then((response)=>{
-    // addCommit(response.data).then(()=>{
-    //   res.json(response.data)
-    // }).catch((err)=>{
-    //   res.json({error:err})
-    // })
-    res.json(response.data)
+    addCommit(response.data).then(()=>{
+      res.json(response.data)
+    }).catch((err)=>{
+      res.json({error:err})
+    })
   }).catch((e)=>{
     res.json({message:e.message})
   })
