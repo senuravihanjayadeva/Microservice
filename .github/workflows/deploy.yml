@@ -47,7 +47,7 @@ jobs:
     
     - name: Deploy to GKE
       run: |
-        gcloud container clusters get-credentials testclustersenura --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
+        gcloud container clusters get-credentials clustertest --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1-c
         
         sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-deployment.yaml
         sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" commit-service.yaml
