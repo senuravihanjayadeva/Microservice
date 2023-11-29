@@ -18,11 +18,12 @@ app.get('/api/commits', (req, res) => {
 
 app.get('/api/commits/:username/:repository', (req, res) => {
   axios.get(`https://api.github.com/repos/${req.params.username}/${req.params.repository}/commits`).then((response)=>{
-    addCommit(response.data).then(()=>{
-      res.json(response.data)
-    }).catch((err)=>{
-      res.json({error:err})
-    })
+    // addCommit(response.data).then(()=>{
+    //   res.json(response.data)
+    // }).catch((err)=>{
+    //   res.json({error:err})
+    // })
+    res.json(response.data)
   }).catch((e)=>{
     res.json({message:e.message})
   })
