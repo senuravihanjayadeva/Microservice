@@ -28,8 +28,8 @@ jobs:
         cd ../pull-request-service && docker build -t senuradockacc/pull-request-service:latest .
         docker push senuradockacc/pull-request-service:latest
 
-        cd ../main-application && docker build -t senuradockacc/main-app-service:latest .
-        docker push senuradockacc/main-app-service:latest
+        cd ../main-application && docker build -t senuradockacc/main-app-service:v1 .
+        docker push senuradockacc/main-app-service:v1
 
     - name: Configure Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v0
