@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: commit-service
-          image: senuradockacc/commit-service:latest
+          image: senuradockacc/commit-service:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
